@@ -1,3 +1,5 @@
+FROM node:lts-trixie AS node
+
 FROM php:8.4-fpm-trixie AS base
 
 WORKDIR /var/www
@@ -34,6 +36,11 @@ EXPOSE 9000
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["php-fpm"]
+
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
+    && ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
 
 # Development stage with Xdebug
 FROM base AS development
