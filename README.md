@@ -1,0 +1,1 @@
+Empty Laravel project containing a Docker Setup
