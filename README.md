@@ -1,5 +1,7 @@
 Empty Laravel project containing a Docker Setup
 
 Contains:
-- XDebug
+- MySQL
+- Redis
 - Node
+- XDebug
