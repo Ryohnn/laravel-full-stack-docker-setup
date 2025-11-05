@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www
     environment:
-      - PHP_IDE_CONFIG="serverName=localhost"
+      - PHP_IDE_CONFIG=serverName=localhost
       - DB_HOST=mysql
       - DB_PORT=3306
       - DB_DATABASE=${DB_DATABASE}
