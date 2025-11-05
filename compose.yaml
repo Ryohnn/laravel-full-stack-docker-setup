@@ -63,7 +63,7 @@ services:
       - "9001:9000"
 
   mysql:
-    image: mysql:8.0
+    image: mariadb:11-jammy
     container_name: laravel_mysql
     restart: unless-stopped
     environment:
