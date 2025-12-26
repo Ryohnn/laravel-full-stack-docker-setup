@@ -1,34 +1,25 @@
-FROM php:8.4-fpm-trixie AS base
+FROM oven/bun:debian AS bun-source
+
+FROM serversideup/php:8.4-fpm-nginx AS base
 
 WORKDIR /var/www/html
 
-RUN apt-get update && apt-get install -y \
-    curl \
-    zip \
-    unzip \
-    git \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libpq-dev \
-    && docker-php-ext-install pdo_pgsql mbstring exif pcntl bcmath gd \
-    && pecl install redis \
-    && docker-php-ext-enable redis \
-    && rm -rf /tmp/pear \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
+COPY --from=bun-source /usr/local/bin/bun /usr/local/bin/bun
+COPY --from=bun-source /usr/local/bin/bunx /usr/local/bin/bunx
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-COPY composer.json composer.lock ./
+COPY composer.json composer.lock package.json ./
 
 RUN composer install --no-scripts --prefer-dist --no-cache
+RUN bun install
 
 COPY . .
+
+USER root
 
 RUN composer dump-autoload --optimize \
     && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
 
-FROM base AS development
+USER www-data
