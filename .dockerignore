@@ -12,8 +12,6 @@ storage/framework/sessions/*
 storage/framework/views/*
 tests
 .phpunit.result.cache
-docker/nginx
 README.md
 .editorconfig
 .styleci.yml
-phpunit.xml
