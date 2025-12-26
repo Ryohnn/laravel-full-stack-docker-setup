@@ -1,7 +1,7 @@
-Empty Laravel project containing a Docker Setup
+Docker setup for Laravel projects
 
 Contains:
-- MySQL
+- PostgreSQL
 - Redis
 - Node
-- XDebug
+- XDebug - Disabled for now
