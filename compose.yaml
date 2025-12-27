@@ -24,23 +24,9 @@ services:
       - MAIL_PORT=1025
       - MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS:-hello@example.com}
     volumes:
-      - ./app:/var/www/html/app
-      - ./bootstrap/app.php:/var/www/html/bootstrap/app.php
-      - ./bootstrap/providers.php:/var/www/html/bootstrap/providers.php
-      - ./config:/var/www/html/config
-      - ./database:/var/www/html/database
-      - ./public:/var/www/html/public
-      - ./resources:/var/www/html/resources
-      - ./routes:/var/www/html/routes
-      - ./tests:/var/www/html/tests
-      - ./storage/logs:/var/www/html/storage/logs
-      - ./artisan:/var/www/html/artisan
-      - ./composer.json:/var/www/html/composer.json
-      - ./composer.lock:/var/www/html/composer.lock
-      - ./package.json:/var/www/html/package.json
-      - ./phpunit.xml:/var/www/html/phpunit.xml
-      - ./vite.config.ts:/var/www/html/vite.config.ts
-      - ./.env:/var/www/html/.env
+      - .:/var/www/html
+      - /var/www/html/node_modules
+      - /var/www/html/vendor
     depends_on:
      - postgres
      - redis
