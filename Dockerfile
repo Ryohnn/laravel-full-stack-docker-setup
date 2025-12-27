@@ -17,9 +17,6 @@ COPY . .
 
 USER root
 
-RUN composer dump-autoload --optimize \
-    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
-    && chmod -R 755 /var/www/html/storage \
-    && chmod -R 755 /var/www/html/bootstrap/cache
-
-USER www-data
+RUN chown -R www-data:www-data /var/www/html/storage/logs /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage/logs \
+    && chmod -R 775 /var/www/html/bootstrap/cache

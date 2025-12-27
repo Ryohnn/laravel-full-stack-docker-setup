@@ -9,6 +9,7 @@ services:
     container_name: php_app
     restart: unless-stopped
     working_dir: /var/www/html
+    user: root
     environment:
       - PHP_IDE_CONFIG=serverName=localhost
       - DB_HOST=${DB_HOST}
@@ -24,14 +25,15 @@ services:
       - MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS:-hello@example.com}
     volumes:
       - ./app:/var/www/html/app
-      - ./bootstrap:/var/www/html/bootstrap
+      - ./bootstrap/app.php:/var/www/html/bootstrap/app.php
+      - ./bootstrap/providers.php:/var/www/html/bootstrap/providers.php
       - ./config:/var/www/html/config
       - ./database:/var/www/html/database
       - ./public:/var/www/html/public
       - ./resources:/var/www/html/resources
       - ./routes:/var/www/html/routes
       - ./tests:/var/www/html/tests
-      - ./storage:/var/www/html/storage
+      - ./storage/logs:/var/www/html/storage/logs
       - ./artisan:/var/www/html/artisan
       - ./composer.json:/var/www/html/composer.json
       - ./composer.lock:/var/www/html/composer.lock
