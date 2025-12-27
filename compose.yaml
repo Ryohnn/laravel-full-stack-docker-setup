@@ -3,13 +3,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        USER_ID: ${USER_ID:-1000}
+        GROUP_ID: ${GROUP_ID:-1000}
       tags:
         - php_app:latest
     image: php_app:latest
     container_name: php_app
     restart: unless-stopped
     working_dir: /var/www/html
-    user: root
     environment:
       - PHP_IDE_CONFIG=serverName=localhost
       - DB_HOST=${DB_HOST}
@@ -25,8 +27,6 @@ services:
       - MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS:-hello@example.com}
     volumes:
       - .:/var/www/html
-      - /var/www/html/node_modules
-      - /var/www/html/vendor
     depends_on:
      - postgres
      - redis
